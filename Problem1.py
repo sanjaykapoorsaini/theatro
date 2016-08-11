@@ -27,24 +27,35 @@ also decrypts the message to obtain the original message.
 OWNER - SANJAY
 
 """
+
+def getModifiedString(message, rows, columns):
+    """  Convert string as per the logic --> change each odd slice(as per the columns) """
     
+    mystring = ""        
+    for num in xrange(columns):  
+        mdofied_row = message[(num * rows) :  ((num + 1) * rows)]       #get transformation row using slicing  
+        if num % 2 == 0: mystring += mdofied_row                        #check for even rows               
+        else: mystring += mdofied_row[::-1]                             #reverse the odd rows
+                                                
+    return mystring
+        
 
 def getAllPossibleSolutions(message):
     """Provides all possible combination of solutions messages """    
     
-    for columns in xrange(2, len(message)):                                    #loop for column 1 to length of the string
+    for columns in xrange(2, len(message)):                             #loop for column 1 to length of the string
         output = ""
-        rows_length = int(round(len(message) / float(columns)))                #convert the column to float to get the round value e.g. for 2.6 we get 3 now
-        for row_num in xrange(rows_length):                                                 
-            row = message[row_num::rows_length]                                #get transformation row using slicing  
-            if row_num % 2 == 0:  output += row                                #check for even rows               
-            else: output += row[::-1]                                          #reverse the odd rows
-            
-        print  "X = " + str(columns) + "  Output is --> " + str(output)      
-
-
+        
+        rows = int(round(len(message) / float(columns)))                #convert the column to float to get the round value e.g. for 2.6 we get 3 now               
+        if rows * columns < len(message): rows += 1                     #Check if there is any item miss due to round of
+        
+        modifed_string = getModifiedString(message, rows, columns)      #Get updated message as per the encrypted logic            
+        for col in xrange(columns):
+            output += modifed_string[col::columns]
+          
+        print  ("X = " + str(columns) + "  Output is --> " + str(output))  
 
 if __name__ == '__main__':
     message = str(raw_input('Please enter the encrypted message... '))
-    print  "X = " + str(1) + "  Output is --> " + str(message)                 #output will be same for 1 column :)
+    print  "X = " + str(1) + "  Output is --> " + str(message)         #output will be same for 1 column :)
     getAllPossibleSolutions(message)
