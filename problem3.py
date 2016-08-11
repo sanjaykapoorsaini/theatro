@@ -51,5 +51,8 @@ if __name__ == '__main__':
     
     specialSum = LaxmitownSumClass()     
     amount = int(input("Please enter coin amount... " ))       
-    specialSum.callMaxExchangeVal(amount)    
-    print "Maximum exchange value is " + str(int(specialSum.amount))  +"  :)" 
+    if specialSum.IsAllCoinsWhole(amount):
+        specialSum.callMaxExchangeVal(amount)  
+    else:
+         specialSum.amount = amount
+    print ("Maximum exchange value is " + str(int(specialSum.amount))  +"  :)" )
