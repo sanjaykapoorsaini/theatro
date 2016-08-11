@@ -15,12 +15,12 @@ owner - Sanjay
 def AreTrucksOrdered(seq):
     """check whether the garage have all the trucks in ordered manner.. """
     
-    seq_list = ['1']                                                                       #first truck needs to be pass to garage      
+    seq_list = ['1']                                                                       # first truck needs to be pass to garage      
     truck_counter = 1                                                                      # start loop from 2nd counter 
     side_road_trucks = list(seq[seq.index('1') + 1:])[::-1]                                # get the lined-up trucks on side road and using them as a STACK (side_road_trucks) 
     
     for truck_number in seq:        
-        if truck_counter + 1 == int(truck_number):                                         #check 2nd, 3rd and so on... truck present in input sequence     
+        if truck_counter + 1 == int(truck_number):                                         # check 2nd, 3rd and so on... truck present in input sequence     
             seq_list.append(truck_number)
             if truck_number in side_road_trucks:  
                 side_road_trucks.remove(truck_number)   
@@ -36,8 +36,8 @@ def AreTrucksOrdered(seq):
         else: 
             if truck_number not in (seq_list + side_road_trucks):           
                 side_road_trucks.append(truck_number)                                      # park truck to Rode-side            
-            
-    return ''.join(seq_list + side_road_trucks[::-1]) == '123456'                          # Checking all trucks are lined up in the garage
+              
+    return ''.join(seq_list + side_road_trucks[::-1]) == ''.join(sorted(seq))              # Checking all trucks are lined up in the garage
        
      
 if __name__ == '__main__':
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     
     seq = str(input("Please Enter the lined-up order of the Trucks.. "))       
     if AreTrucksOrdered(seq):
-        print 'YES!!! #true '
-    else: print 'No!!! #false '
+        print ('YES!!! #true ')
+    else: print ('No!!! #false ')
         
     
