@@ -40,9 +40,12 @@ class LaxmitownSumClass:
         
         for fraction in self.coins_fraction:                
             if self.isWhole(x / fraction):
-                self.amount += x / fraction
                 if self.IsAllCoinsWhole(x / fraction):                
-                    self.callMaxExchangeVal(x / fraction)                                                      # recursive call for child fractions
+                    self.callMaxExchangeVal(x / fraction)                                                      # recursive call for child fractions        
+                else: 
+                    self.amount += x / fraction
+            else:
+                self.amount += x / fraction
         return 
 
 
